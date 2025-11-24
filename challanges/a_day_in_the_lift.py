@@ -5,7 +5,10 @@ def solve():
     floors = {
         i: tuple(map(int, row.split(" ")))
         for i, row in enumerate(
-            Path("./input.txt").read_text().strip().splitlines()
+            Path("./inputs/a_day_in_the_lift.txt")
+            .read_text()
+            .strip()
+            .splitlines()
         )
     }
     count = 1
