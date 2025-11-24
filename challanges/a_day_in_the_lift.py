@@ -1,12 +1,7 @@
-from pathlib import Path
-
-
 def solve(input_file: str):
     floors = {
         i: tuple(map(int, row.split(" ")))
-        for i, row in enumerate(
-            Path(input_file).read_text().strip().splitlines()
-        )
+        for i, row in enumerate(input_file.splitlines())
     }
     count = 1
     floor = 0

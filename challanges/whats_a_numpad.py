@@ -1,6 +1,3 @@
-from pathlib import Path
-
-
 def solve(input_file: str):
     numpad = {
         "1": "",
@@ -15,8 +12,7 @@ def solve(input_file: str):
         "0": " ",
     }
     message = ""
-    sequence = Path(input_file).read_text().strip()
-    for line in sequence.split("\n"):
+    for line in input_file.split("\n"):
         num, count = line.split(" ")
         message += numpad[num][int(count) - 1]
     print(message)
