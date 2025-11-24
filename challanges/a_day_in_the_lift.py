@@ -1,14 +1,11 @@
 from pathlib import Path
 
 
-def solve():
+def solve(input_file: str):
     floors = {
         i: tuple(map(int, row.split(" ")))
         for i, row in enumerate(
-            Path("./inputs/a_day_in_the_lift.txt")
-            .read_text()
-            .strip()
-            .splitlines()
+            Path(input_file).read_text().strip().splitlines()
         )
     }
     count = 1
