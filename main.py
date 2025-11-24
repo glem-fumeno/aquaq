@@ -1,4 +1,5 @@
 from pathlib import Path
+from types import ModuleType
 
 from challanges import (
     a_day_in_the_lift,
@@ -13,20 +14,22 @@ from challanges import (
 )
 
 
-def prepare(file_path: str) -> str:
-    return Path("./inputs").joinpath(file_path).read_text().strip()
+def solve(module: ModuleType):
+    file_path = module.__name__.split(".")[1] + ".txt"
+    file_input = Path("./inputs").joinpath(file_path).read_text().strip()
+    module.solve(file_input)
 
 
 def main():
-    whats_a_numpad.solve(prepare("whats_a_numpad.txt"))
-    rose_by_any_other_name.solve(prepare("rose_by_any_other_name.txt"))
-    one_is_all_you_need.solve(prepare("one_is_all_you_need.txt"))
-    short_walks.solve(prepare("short_walks.txt"))
-    this_is_good_co_primen.solve(prepare("this_is_good_co_primen.txt"))
-    snake_eyes.solve(prepare("snake_eyes.txt"))
-    let_me_count_the_ways.solve(prepare("let_me_count_the_ways.txt"))
-    what_is_best_in_life.solve(prepare("what_is_best_in_life.txt"))
-    a_day_in_the_lift.solve(prepare("a_day_in_the_lift.txt"))
+    solve(whats_a_numpad)
+    solve(rose_by_any_other_name)
+    solve(one_is_all_you_need)
+    solve(short_walks)
+    solve(this_is_good_co_primen)
+    solve(snake_eyes)
+    solve(let_me_count_the_ways)
+    solve(what_is_best_in_life)
+    solve(a_day_in_the_lift)
 
 
 if __name__ == "__main__":
