@@ -5,6 +5,7 @@ from challanges import (
     one_is_all_you_need,
     rose_by_any_other_name,
     short_walks,
+    snake_eyes,
     this_is_good_co_primen,
     whats_a_numpad,
 )
@@ -21,6 +22,7 @@ def main():
     short_walks.solve(prepare("short_walks.txt"))
     this_is_good_co_primen.solve(prepare("this_is_good_co_primen.txt"))
     a_day_in_the_lift.solve(prepare("a_day_in_the_lift.txt"))
+    snake_eyes.solve(prepare("snake_eyes.txt"))
 
 
 if __name__ == "__main__":
