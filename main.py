@@ -8,6 +8,7 @@ from challanges import (
     short_walks,
     snake_eyes,
     this_is_good_co_primen,
+    what_is_best_in_life,
     whats_a_numpad,
 )
 
@@ -24,6 +25,7 @@ def main():
     this_is_good_co_primen.solve(prepare("this_is_good_co_primen.txt"))
     snake_eyes.solve(prepare("snake_eyes.txt"))
     let_me_count_the_ways.solve(prepare("let_me_count_the_ways.txt"))
+    what_is_best_in_life.solve(prepare("what_is_best_in_life.txt"))
     a_day_in_the_lift.solve(prepare("a_day_in_the_lift.txt"))
 
 
