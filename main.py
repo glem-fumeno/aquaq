@@ -3,6 +3,7 @@ from types import ModuleType
 
 from challanges import (
     a_day_in_the_lift,
+    cron_flakes,
     let_me_count_the_ways,
     one_is_all_you_need,
     rose_by_any_other_name,
@@ -30,6 +31,7 @@ def main():
     solve(let_me_count_the_ways)
     solve(what_is_best_in_life)
     solve(a_day_in_the_lift)
+    solve(cron_flakes)
 
 
 if __name__ == "__main__":
