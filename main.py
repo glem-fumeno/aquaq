@@ -4,6 +4,7 @@ from types import ModuleType
 from challanges import (
     a_day_in_the_lift,
     big_data,
+    cron_flakes,
     let_me_count_the_ways,
     one_is_all_you_need,
     rose_by_any_other_name,
@@ -33,6 +34,7 @@ def main():
     solve(snake_eyes)
     solve(let_me_count_the_ways)
     solve(what_is_best_in_life)
+    solve(cron_flakes)
     solve(big_data)
     solve(a_day_in_the_lift)
 
