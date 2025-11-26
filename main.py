@@ -11,6 +11,7 @@ from challanges import (
     short_walks,
     snake_eyes,
     this_is_good_co_primen,
+    troll_toll,
     what_is_best_in_life,
     whats_a_numpad,
 )
@@ -36,6 +37,7 @@ def main():
     solve(what_is_best_in_life)
     solve(cron_flakes)
     solve(big_data)
+    solve(troll_toll)
     solve(a_day_in_the_lift)
 
 
