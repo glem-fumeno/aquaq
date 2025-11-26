@@ -1,44 +1,43 @@
+import sys
+from importlib import import_module
 from pathlib import Path
-from types import ModuleType
 
-from challanges import (
-    a_day_in_the_lift,
-    big_data,
-    cron_flakes,
-    let_me_count_the_ways,
-    one_is_all_you_need,
-    rose_by_any_other_name,
-    short_walks,
-    snake_eyes,
-    this_is_good_co_primen,
-    troll_toll,
-    what_is_best_in_life,
-    whats_a_numpad,
-)
+puzzles = [
+    "whats_a_numpad",
+    "rose_by_any_other_name",
+    "one_is_all_you_need",
+    "short_walks",
+    "this_is_good_co_primen",
+    "snake_eyes",
+    "let_me_count_the_ways",
+    "what_is_best_in_life",
+    "cron_flakes",
+    "big_data",
+    "troll_toll",
+    "boxed_in",
+    "a_day_in_the_lift",
+]
 
 
-def solve(module: ModuleType):
-    puzzle_name = module.__name__.split(".")[1]
-    file_input = (
-        Path("./inputs").joinpath(puzzle_name + ".txt").read_text().strip()
-    )
-    result = module.solve(file_input)
-    print(f"{puzzle_name: >25}: {result}")
+def solve(name: str):
+    module = import_module(f"challanges.{name}")
+    file_input = Path("./inputs").joinpath(name + ".txt").read_text().strip()
+    return module.solve(file_input)
 
 
 def main():
-    solve(whats_a_numpad)
-    solve(rose_by_any_other_name)
-    solve(one_is_all_you_need)
-    solve(short_walks)
-    solve(this_is_good_co_primen)
-    solve(snake_eyes)
-    solve(let_me_count_the_ways)
-    solve(what_is_best_in_life)
-    solve(cron_flakes)
-    solve(big_data)
-    solve(troll_toll)
-    solve(a_day_in_the_lift)
+    args = sys.argv
+    if len(args) == 2:
+        if args[-1] == "-h":
+            print(*puzzles)
+            return
+        print(solve(args[1]))
+    else:
+        for name in puzzles:
+            result = solve(name)
+            print(
+                " " * (max(map(len, puzzles)) - len(name)), f"{name}: {result}"
+            )
 
 
 if __name__ == "__main__":
