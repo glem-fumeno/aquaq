@@ -14,4 +14,4 @@ def solve(input_file: str):
             scores.get(p2, 1200),
             int(s1) > int(s2),
         )
-    print(int(max(scores.values())) - int(min(scores.values())))
+    return int(max(scores.values())) - int(min(scores.values()))

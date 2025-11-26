@@ -15,4 +15,4 @@ def solve(input_file: str):
     for line in input_file.split("\n"):
         num, count = line.split(" ")
         message += numpad[num][int(count) - 1]
-    print(message)
+    return message

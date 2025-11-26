@@ -11,4 +11,4 @@ def is_co_prime(v, r):
 
 def solve(input_file: str):
     value = int(input_file)
-    print(sum(i + 1 for i in range(value) if is_co_prime(value, i + 1)))
+    return sum(i + 1 for i in range(value) if is_co_prime(value, i + 1))

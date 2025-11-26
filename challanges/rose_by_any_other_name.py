@@ -8,4 +8,4 @@ def solve(input_file: str):
     result = ""
     for ch in [s[0], s[1], s[i], s[i + 1], s[2 * i], s[2 * i + 1]]:
         result += hex_digits.get(ch, "0")
-    print(result)
+    return result

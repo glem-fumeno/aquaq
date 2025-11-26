@@ -5,4 +5,4 @@ def solve(input_file: str):
         if number in result:
             result = result[: result.index(number)]
         result.append(number)
-    print(sum(result))
+    return sum(result)

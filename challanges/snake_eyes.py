@@ -20,4 +20,4 @@ def solve(input_file: str):
         rotate(dice2, rotations[direction])
         if dice1["F"] == dice2["F"]:
             count += i
-    print(count)
+    return count

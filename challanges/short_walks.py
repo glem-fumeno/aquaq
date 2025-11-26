@@ -17,4 +17,4 @@ def solve(input_file: str):
             pr, pc = r, c
         count += pr + pc
 
-    print(count)
+    return count

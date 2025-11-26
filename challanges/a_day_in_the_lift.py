@@ -12,4 +12,4 @@ def solve(input_file: str):
             direction *= -1
         floor += magnitude * direction
         count += 1
-    print(count)
+    return count
