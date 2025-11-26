@@ -16,6 +16,7 @@ puzzles = [
     "troll_toll",
     "boxed_in",
     "a_day_in_the_lift",
+    "o_rle"
 ]
 
 
