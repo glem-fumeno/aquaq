@@ -8,6 +8,8 @@ from aquaq.challange_03 import solve_03
 from aquaq.challange_04 import solve_04
 from aquaq.challange_05 import solve_05
 from aquaq.challange_06 import solve_06
+from aquaq.challange_07 import solve_07
+from aquaq.challange_08 import solve_08
 
 
 def get_input(challange: str) -> str:
@@ -27,3 +29,5 @@ def main() -> None:
     solve(solve_04, "04")
     solve(solve_05, "05")
     solve(solve_06, "06")
+    solve(solve_07, "07")
+    solve(solve_08, "08")
