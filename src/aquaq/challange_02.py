@@ -1,4 +1,4 @@
-def solve_02(file: str):
+def solve_02(file: str) -> int:
     solution = []
     for number in file.split(" "):
         number = int(number)
@@ -7,4 +7,4 @@ def solve_02(file: str):
             solution = solution[: idx + 1]
         else:
             solution.append(number)
-    print(sum(solution))
+    return sum(solution)

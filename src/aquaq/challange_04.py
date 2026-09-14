@@ -1,4 +1,4 @@
-def solve_04(file: str):
+def solve_04(file: str) -> int:
     goal = int(file)
     factors = set()
     current_factor = 2
@@ -19,4 +19,4 @@ def solve_04(file: str):
         else:
             coprimes.append(i)
 
-    print(sum(coprimes))
+    return sum(coprimes)

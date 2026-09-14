@@ -37,7 +37,7 @@ class Dice:
                 self.bottom = front
 
 
-def solve_05(file: str):
+def solve_05(file: str) -> int:
     dice_1 = Dice(1, 2, 3)
     dice_2 = Dice(1, 3, 2)
     matching = []
@@ -48,4 +48,4 @@ def solve_05(file: str):
         if dice_1.front == dice_2.front:
             matching.append(i)
 
-    print(sum(matching))
+    return sum(matching)

@@ -18,7 +18,7 @@ def get_new_position(x1: int, y1: int, x2: int, y2: int) -> tuple[int, int]:
     return x1, y1
 
 
-def solve_03(file: str):
+def solve_03(file: str) -> int:
     solution = 0
     y, x = 0, 2
     for c in file:
@@ -34,4 +34,4 @@ def solve_03(file: str):
             case v:
                 raise ValueError(f"invalid value: {v}")
         solution += x + y
-    print(solution)
+    return solution

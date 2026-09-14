@@ -1,4 +1,4 @@
-def solve_08(file: str):
+def solve_08(file: str) -> int:
     _, *logs = file.splitlines()
     milk: list[int] = []
     expiry: list[int] = []
@@ -16,4 +16,4 @@ def solve_08(file: str):
         if new_milk != "0":
             milk.append(int(new_milk))
             expiry.append(i + 5)
-    print(sum(milk) + cereal)
+    return sum(milk) + cereal

@@ -11,9 +11,9 @@ letters_by_number: dict[int, str] = {
 }
 
 
-def solve_00(file: str):
+def solve_00(file: str) -> str:
     solution = ""
     for line in file.splitlines():
         number, amount = map(int, line.split(" "))
         solution += letters_by_number[number][amount - 1]
-    print(solution)
+    return solution

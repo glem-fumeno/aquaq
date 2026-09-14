@@ -1,5 +1,7 @@
 from collections.abc import Callable
 from pathlib import Path
+from typing import Any
+import time
 
 from aquaq.challange_00 import solve_00
 from aquaq.challange_01 import solve_01
@@ -10,15 +12,21 @@ from aquaq.challange_05 import solve_05
 from aquaq.challange_06 import solve_06
 from aquaq.challange_07 import solve_07
 from aquaq.challange_08 import solve_08
+from aquaq.challange_09 import solve_09
+from aquaq.challange_10 import solve_10
 
 
 def get_input(challange: str) -> str:
     return Path(f"challanges/{challange}.txt").read_text().removesuffix("\n")
 
 
-def solve(solution: Callable[[str], None], challange: str):
-    print(f"--- {challange} ---")
-    solution(get_input(challange))
+def solve(get_solution: Callable[[str], Any], challange: str):
+    start = time.time()
+    result = get_solution(get_input(challange))
+    end = time.time()
+    print(f"--- challange {challange} ({end - start:.5f}s) ---")
+    print(result)
+    print()
 
 
 def main() -> None:
@@ -31,3 +39,5 @@ def main() -> None:
     solve(solve_06, "06")
     solve(solve_07, "07")
     solve(solve_08, "08")
+    solve(solve_09, "09")
+    solve(solve_10, "10")

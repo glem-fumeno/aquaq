@@ -5,7 +5,7 @@ def get_new_ranking(winning: float, losing: float) -> tuple[float, float]:
     return winning, losing
 
 
-def solve_07(file: str):
+def solve_07(file: str) -> int:
     _, *games = file.splitlines()
     scores: dict[str, float] = {}
 
@@ -22,4 +22,4 @@ def solve_07(file: str):
         scores[player_a] = a_score
         scores[player_b] = b_score
 
-    print(int(max(scores.values())) - int(min(scores.values())))
+    return int(max(scores.values())) - int(min(scores.values()))
