@@ -52,4 +52,4 @@ def main() -> None:
     solve(solve_13, "13")
     solve(solve_14, "14")
     # solve(solve_15, "15") # run for all solutions
-    solve(solve_16, "16") # run for all solutions
+    solve(solve_16, "16")
