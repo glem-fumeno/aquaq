@@ -1,4 +1,6 @@
+import sys
 import time
+from collections import OrderedDict
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -18,17 +20,46 @@ from aquaq.challange_11 import solve_11
 from aquaq.challange_12 import solve_12
 from aquaq.challange_13 import solve_13
 from aquaq.challange_14 import solve_14
-# from aquaq.challange_15 import solve_15
+from aquaq.challange_15 import solve_15
 from aquaq.challange_16 import solve_16
 from aquaq.challange_17 import solve_17
-# from aquaq.challange_18 import solve_18
+from aquaq.challange_18 import solve_18
+from aquaq.challange_19 import solve_19
+
+Solution = Callable[[str], Any]
+
+challanges: OrderedDict[str, Solution] = OrderedDict(
+    [
+        ("00", solve_00),
+        ("00", solve_00),
+        ("01", solve_01),
+        ("02", solve_02),
+        ("03", solve_03),
+        ("04", solve_04),
+        ("05", solve_05),
+        ("06", solve_06),
+        ("07", solve_07),
+        ("08", solve_08),
+        ("09", solve_09),
+        ("10", solve_10),
+        ("11", solve_11),
+        ("12", solve_12),
+        ("13", solve_13),
+        ("14", solve_14),
+        ("15", solve_15),  # takes 1.4 seconds
+        ("16", solve_16),  # takes 5.5 seconds
+        ("17", solve_17),
+        ("18", solve_18),  # takes 1.2 seconds
+        ("19", solve_19),  # takes 13 minutes
+    ]
+)
 
 
 def get_input(challange: str) -> str:
     return Path(f"challanges/{challange}.txt").read_text().removesuffix("\n")
 
 
-def solve(get_solution: Callable[[str], Any], challange: str):
+def solve(get_solution: Solution, challange: str):
     start = time.time()
     result = get_solution(get_input(challange))
     end = time.time()
@@ -38,22 +69,8 @@ def solve(get_solution: Callable[[str], Any], challange: str):
 
 
 def main() -> None:
-    solve(solve_00, "00")
-    solve(solve_01, "01")
-    solve(solve_02, "02")
-    solve(solve_03, "03")
-    solve(solve_04, "04")
-    solve(solve_05, "05")
-    solve(solve_06, "06")
-    solve(solve_07, "07")
-    solve(solve_08, "08")
-    solve(solve_09, "09")
-    solve(solve_10, "10")
-    solve(solve_11, "11")
-    solve(solve_12, "12")
-    solve(solve_13, "13")
-    solve(solve_14, "14")
-    # solve(solve_15, "15") # run for all solutions
-    solve(solve_16, "16")
-    solve(solve_17, "17")
-    # solve(solve_18, "18") # run for all solutions
+    if len(sys.argv) <= 1:
+        for challange, solution in challanges.items():
+            solve(solution, challange)
+    else:
+        solve(challanges[sys.argv[1]], sys.argv[1])

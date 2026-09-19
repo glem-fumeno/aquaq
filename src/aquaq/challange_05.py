@@ -1,6 +1,6 @@
 from typing import Literal, cast
 
-type Direction = Literal["L", "R", "U", "D"]
+Direction = Literal["L", "R", "U", "D"]
 
 
 class Dice:
