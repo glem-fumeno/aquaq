@@ -21,6 +21,7 @@ from aquaq.challange_14 import solve_14
 # from aquaq.challange_15 import solve_15
 from aquaq.challange_16 import solve_16
 from aquaq.challange_17 import solve_17
+# from aquaq.challange_18 import solve_18
 
 
 def get_input(challange: str) -> str:
@@ -55,3 +56,4 @@ def main() -> None:
     # solve(solve_15, "15") # run for all solutions
     solve(solve_16, "16")
     solve(solve_17, "17")
+    # solve(solve_18, "18") # run for all solutions
