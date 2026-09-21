@@ -27,6 +27,7 @@ from aquaq.challange_18 import solve_18
 from aquaq.challange_19 import solve_19
 from aquaq.challange_20 import solve_20
 from aquaq.challange_21 import solve_21
+from aquaq.challange_22 import solve_22
 
 Solution = Callable[[str], Any]
 
@@ -55,6 +56,7 @@ challanges: OrderedDict[str, Solution] = OrderedDict(
         ("19", solve_19),  # takes 13 minutes
         ("20", solve_20),
         ("21", solve_21),
+        ("22", solve_22),
     ]
 )
 
