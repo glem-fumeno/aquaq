@@ -8,18 +8,16 @@ from typing import Self
 @dataclass
 class Node:
     children: tuple[Node, Node] | None
-    value: set[str]
+    value: str
     weight: int
 
     @classmethod
-    def from_value(cls, value: set[str], weight: int) -> Self:
+    def from_value(cls, value: str, weight: int) -> Self:
         return cls(None, value, weight)
 
     @classmethod
     def from_childern(cls, left: Node, right: Node) -> Self:
-        return cls(
-            (left, right), left.value.union(right.value), left.weight + right.weight
-        )
+        return cls((left, right), left.value + right.value, left.weight + right.weight)
 
     def __repr__(self) -> str:
         value = "".join(self.value)
@@ -56,13 +54,24 @@ class Node:
                 current_node = self
         return solution
 
+    def codes(self) -> dict[str, str]:
+        if self.children is None:
+            return {"": self.value}
+        left, right = self.children
+        return {
+            **{"0" + k: v for k, v in left.codes().items()},
+            **{"1" + k: v for k, v in right.codes().items()},
+        }
+
+    @property
+    def sort_by(self) -> tuple[int, int, str]:
+        return self.weight, len(self.value), self.value
+
 
 def solve_24(file: str) -> str:
     encoder, word = file.split("\n")
-    nodes = [Node.from_value({v}, w) for v, w in Counter(encoder).most_common()]
+    nodes = [Node.from_value(v, w) for v, w in Counter(encoder).items()]
     while len(nodes) > 1:
-        nodes = sorted(nodes, key=lambda v: v.weight, reverse=True)
+        nodes.sort(key=lambda v: v.sort_by, reverse=True)
         nodes.append(Node.from_childern(nodes.pop(), nodes.pop()))
-    root = nodes[0]
-    print(root)
-    return root.decode(word)
+    return nodes[0].decode(word)
