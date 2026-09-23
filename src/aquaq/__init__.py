@@ -32,6 +32,7 @@ from aquaq.challange_23 import solve_23
 from aquaq.challange_24 import solve_24
 from aquaq.challange_25 import solve_25
 from aquaq.challange_26 import solve_26
+from aquaq.challange_27 import solve_27
 
 Solution = Callable[[str], Any]
 
@@ -65,6 +66,7 @@ challanges: OrderedDict[str, Solution] = OrderedDict(
         ("24", solve_24),
         ("25", solve_25),
         ("26", solve_26),
+        ("27", solve_27),
     ]
 )
 
