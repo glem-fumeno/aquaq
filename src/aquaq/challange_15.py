@@ -1,10 +1,11 @@
 from collections import defaultdict
 from functools import cache
+from pathlib import Path
 
 dictionary: dict[int, set[str]] = defaultdict(set[str])
-with open("./additional/words.txt") as f:
-    for line in f.read().splitlines():
-        dictionary[len(line)].add(line)
+file = Path("./additional/words.txt").read_text()
+for line in file.splitlines():
+    dictionary[len(line)].add(line)
 
 
 def is_neighbour(word1: str, word2: str) -> bool:

@@ -1,10 +1,10 @@
 from collections import defaultdict
+from pathlib import Path
 
 letters: dict[str, list[str]] = defaultdict(list)
-
-with open("./additional/ascii-alphabet.txt") as f:
-    for i, line in enumerate(f.read().splitlines()):
-        letters[chr(ord("A") + i // 6)].append(line)
+file = Path("./additional/ascii-alphabet.txt").read_text()
+for i, line in enumerate(file.splitlines()):
+    letters[chr(ord("A") + i // 6)].append(line)
 
 
 def solve_16(file: str) -> int:

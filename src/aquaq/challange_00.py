@@ -1,13 +1,9 @@
-letters_by_number: dict[int, str] = {
-    2: "abc",
-    3: "def",
-    4: "ghi",
-    5: "jkl",
-    6: "mno",
-    7: "pqrs",
-    8: "tuv",
-    9: "wxyz",
-    0: " ",
+from pathlib import Path
+
+number_pad = Path("./additional/number-pad.txt").read_text()
+number_letter = map(lambda v: v.split(" "), number_pad.splitlines())
+letter_by_number: dict[int, str] = {
+    int(number): letter.replace("_", " ") for number, letter in number_letter
 }
 
 
@@ -15,5 +11,5 @@ def solve_00(file: str) -> str:
     solution = ""
     for line in file.splitlines():
         number, amount = map(int, line.split(" "))
-        solution += letters_by_number[number][amount - 1]
+        solution += letter_by_number[number][amount - 1]
     return solution

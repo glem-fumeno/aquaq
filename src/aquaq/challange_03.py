@@ -1,11 +1,6 @@
-board = [
-    "  ##  ",
-    " #### ",
-    "######",
-    "######",
-    " #### ",
-    "  ##  ",
-]
+from pathlib import Path
+
+board = Path("./additional/short-room.txt").read_text().splitlines()
 
 
 def get_new_position(x1: int, y1: int, x2: int, y2: int) -> tuple[int, int]:
