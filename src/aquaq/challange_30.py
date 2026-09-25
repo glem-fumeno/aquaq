@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import sys
+from functools import total_ordering
 
 inv = {".": ".", "1": "0", "0": "1"}
 card_cache: dict[str, Node] = {}
 
 
+@total_ordering
 class Node:
     cards: str
     __is_solvable: bool | None
@@ -18,7 +20,7 @@ class Node:
     def cached(cls, cards: str) -> Node:
         if cards not in card_cache:
             node = cls(cards)
-            if len(cards) < 500:
+            if len(cards) < 600:
                 card_cache[cards] = node
             return node
         return card_cache[cards]
@@ -32,6 +34,12 @@ class Node:
         cards[pos - 1 : pos + 2] = [inv[cards[pos - 1]], ".", inv[cards[pos + 1]]]
         return Node.cached("".join(cards))
 
+    def split_at(self, pos: int) -> list[Node]:
+        return [
+            Node.padded(self.cards[: pos - 1] + inv[self.cards[pos - 1]]),
+            Node.padded(inv[self.cards[pos + 1]] + self.cards[pos + 2 :]),
+        ]
+
     def face_up_indices(self) -> list[int]:
         return [i for i, c in enumerate(self.cards) if c == "1"]
 
@@ -43,8 +51,7 @@ class Node:
 
     def sub_nodes(self) -> list[Node]:
         return sorted(
-            [Node.padded(card) for card in self.cards.split(".") if card != ""],
-            key=lambda n: len(n.cards),
+            Node.padded(card) for card in self.cards[1:-1].split(".") if card != ""
         )
 
     def sub_nodes_solvable(self) -> bool:
@@ -52,7 +59,8 @@ class Node:
 
     def face_up_removed_solvable(self) -> bool:
         return any(
-            self.with_removed_card(i).is_solvable() for i in self.face_up_indices()
+            all(node.is_solvable() for node in self.split_at(i))
+            for i in self.face_up_indices()
         )
 
     def is_solvable(self) -> bool:
@@ -73,8 +81,12 @@ class Node:
     def __hash__(self) -> int:
         return hash(self.cards)
 
-    def __eq__(self, value: object, /) -> bool:
-        return isinstance(value, Node) and value.cards == self.cards
+    def __lt__(self, other: Node) -> bool:
+        if self.__is_solvable is not None:
+            return True
+        if other.__is_solvable is not None:
+            return False
+        return len(self.cards) < len(other.cards)
 
 
 def solve_30(file: str) -> int:

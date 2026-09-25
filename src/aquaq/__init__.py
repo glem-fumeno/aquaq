@@ -72,7 +72,7 @@ challanges: OrderedDict[str, Solution] = OrderedDict(
         ("27", solve_27),
         ("28", solve_28),
         ("29", solve_29),
-        ("30", solve_30),  # takes 69 seconds and 8 gigs of ram
+        ("30", solve_30),  # takes 14 seconds
     ]
 )
 
