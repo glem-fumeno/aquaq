@@ -1,43 +1,39 @@
 from __future__ import annotations
 
-from typing import Literal, cast
+import sys
 
-CardState = Literal[".", "0", "1"]
+inv = {".": ".", "1": "0", "0": "1"}
+card_cache: dict[str, Node] = {}
 
 
 class Node:
     cards: str
+    __is_solvable: bool | None
 
     def __init__(self, cards: str) -> None:
         self.cards = cards
+        self.__is_solvable = None
 
-    def replace_at(self, pos: int, state: CardState):
-        self.cards = self.cards[:pos] + state + self.cards[pos + 1 :]
+    @classmethod
+    def cached(cls, cards: str) -> Node:
+        if cards not in card_cache:
+            node = cls(cards)
+            if len(cards) < 500:
+                card_cache[cards] = node
+            return node
+        return card_cache[cards]
 
-    def get_at(self, pos: int) -> CardState:
-        return cast(CardState, self.cards[pos])
+    @classmethod
+    def padded(cls, cards: str) -> Node:
+        return cls.cached("." + cards + ".")
 
-    def get_opposite(self, state: CardState) -> CardState:
-        match state:
-            case ".":
-                return "."
-            case "0":
-                return "1"
-            case "1":
-                return "0"
+    def with_removed_card(self, pos: int) -> Node:
+        cards = list(self.cards)
+        cards[pos - 1 : pos + 2] = [inv[cards[pos - 1]], ".", inv[cards[pos + 1]]]
+        return Node.cached("".join(cards))
 
-    def get_node_with_removed_card(self, pos: int) -> Node:
-        next_node = Node(self.cards)
-        next_node.replace_at(pos, ".")
-        next_node.replace_at(pos - 1, self.get_opposite(self.get_at(pos - 1)))
-        next_node.replace_at(pos + 1, self.get_opposite(self.get_at(pos + 1)))
-        return next_node
-
-    def get_face_up_indices(self) -> list[int]:
+    def face_up_indices(self) -> list[int]:
         return [i for i, c in enumerate(self.cards) if c == "1"]
-
-    def __repr__(self) -> str:
-        return self.cards
 
     def is_winning(self) -> bool:
         return all(c == "." for c in self.cards)
@@ -45,12 +41,48 @@ class Node:
     def is_losing(self) -> bool:
         return all(c != "1" for c in self.cards)
 
+    def sub_nodes(self) -> list[Node]:
+        return sorted(
+            [Node.padded(card) for card in self.cards.split(".") if card != ""],
+            key=lambda n: len(n.cards),
+        )
+
+    def sub_nodes_solvable(self) -> bool:
+        return all(node.is_solvable() for node in self.sub_nodes())
+
+    def face_up_removed_solvable(self) -> bool:
+        return any(
+            self.with_removed_card(i).is_solvable() for i in self.face_up_indices()
+        )
+
+    def is_solvable(self) -> bool:
+        if self.__is_solvable is None:
+            if self.is_winning():
+                self.__is_solvable = True
+            elif self.is_losing():
+                self.__is_solvable = False
+            elif self.cards.count(".") > 2:
+                self.__is_solvable = self.sub_nodes_solvable()
+            else:
+                self.__is_solvable = self.face_up_removed_solvable()
+        return self.__is_solvable
+
+    def __repr__(self) -> str:
+        return self.cards
+
+    def __hash__(self) -> int:
+        return hash(self.cards)
+
+    def __eq__(self, value: object, /) -> bool:
+        return isinstance(value, Node) and value.cards == self.cards
+
 
 def solve_30(file: str) -> int:
-    for line in file.splitlines():
-        node = Node("." + line + ".")
-        nodes = [node.get_node_with_removed_card(i) for i in node.get_face_up_indices()]
-        for index in node.get_face_up_indices():
-            next_node = node.get_node_with_removed_card(index)
-        print()
-    return 0
+    solution = 0
+    sys.setrecursionlimit(10_000)
+    for i, line in enumerate(file.splitlines()):
+        print(i, line)
+        node = Node.padded(line)
+        nodes = [node.with_removed_card(i) for i in node.face_up_indices()]
+        solution += sum(node.is_solvable() for node in nodes)
+    return solution
