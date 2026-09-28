@@ -5,41 +5,41 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
-from aquaq.challange_00 import solve_00
-from aquaq.challange_01 import solve_01
-from aquaq.challange_02 import solve_02
-from aquaq.challange_03 import solve_03
-from aquaq.challange_04 import solve_04
-from aquaq.challange_05 import solve_05
-from aquaq.challange_06 import solve_06
-from aquaq.challange_07 import solve_07
-from aquaq.challange_08 import solve_08
-from aquaq.challange_09 import solve_09
-from aquaq.challange_10 import solve_10
-from aquaq.challange_11 import solve_11
-from aquaq.challange_12 import solve_12
-from aquaq.challange_13 import solve_13
-from aquaq.challange_14 import solve_14
-from aquaq.challange_15 import solve_15
-from aquaq.challange_16 import solve_16
-from aquaq.challange_17 import solve_17
-from aquaq.challange_18 import solve_18
-from aquaq.challange_19 import solve_19
-from aquaq.challange_20 import solve_20
-from aquaq.challange_21 import solve_21
-from aquaq.challange_22 import solve_22
-from aquaq.challange_23 import solve_23
-from aquaq.challange_24 import solve_24
-from aquaq.challange_25 import solve_25
-from aquaq.challange_26 import solve_26
-from aquaq.challange_27 import solve_27
-from aquaq.challange_28 import solve_28
-from aquaq.challange_29 import solve_29
-from aquaq.challange_30 import solve_30
+from aquaq.challenge_00 import solve_00
+from aquaq.challenge_01 import solve_01
+from aquaq.challenge_02 import solve_02
+from aquaq.challenge_03 import solve_03
+from aquaq.challenge_04 import solve_04
+from aquaq.challenge_05 import solve_05
+from aquaq.challenge_06 import solve_06
+from aquaq.challenge_07 import solve_07
+from aquaq.challenge_08 import solve_08
+from aquaq.challenge_09 import solve_09
+from aquaq.challenge_10 import solve_10
+from aquaq.challenge_11 import solve_11
+from aquaq.challenge_12 import solve_12
+from aquaq.challenge_13 import solve_13
+from aquaq.challenge_14 import solve_14
+from aquaq.challenge_15 import solve_15
+from aquaq.challenge_16 import solve_16
+from aquaq.challenge_17 import solve_17
+from aquaq.challenge_18 import solve_18
+from aquaq.challenge_19 import solve_19
+from aquaq.challenge_20 import solve_20
+from aquaq.challenge_21 import solve_21
+from aquaq.challenge_22 import solve_22
+from aquaq.challenge_23 import solve_23
+from aquaq.challenge_24 import solve_24
+from aquaq.challenge_25 import solve_25
+from aquaq.challenge_26 import solve_26
+from aquaq.challenge_27 import solve_27
+from aquaq.challenge_28 import solve_28
+from aquaq.challenge_29 import solve_29
+from aquaq.challenge_30 import solve_30
 
 Solution = Callable[[str], Any]
 
-challanges: OrderedDict[str, Solution] = OrderedDict(
+challenges: OrderedDict[str, Solution] = OrderedDict(
     [
         ("00", solve_00),
         ("00", solve_00),
@@ -77,22 +77,22 @@ challanges: OrderedDict[str, Solution] = OrderedDict(
 )
 
 
-def get_input(challange: str) -> str:
-    return Path(f"challanges/{challange}.txt").read_text().removesuffix("\n")
+def get_input(challenge: str) -> str:
+    return Path(f"challenges/{challenge}.txt").read_text().removesuffix("\n")
 
 
-def solve(get_solution: Solution, challange: str):
+def solve(get_solution: Solution, challenge: str):
     start = time.time()
-    result = get_solution(get_input(challange))
+    result = get_solution(get_input(challenge))
     end = time.time()
-    print(f"--- challange {challange} ({end - start:.5f}s) ---")
+    print(f"--- challenge {challenge} ({end - start:.5f}s) ---")
     print(result)
     print()
 
 
 def main() -> None:
     if len(sys.argv) <= 1:
-        for challange, solution in challanges.items():
-            solve(solution, challange)
+        for challenge, solution in challenges.items():
+            solve(solution, challenge)
     else:
-        solve(challanges[sys.argv[1]], sys.argv[1])
+        solve(challenges[sys.argv[1]], sys.argv[1])
