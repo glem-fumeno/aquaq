@@ -39,6 +39,7 @@ from aquaq.challenge_30 import solve_30
 from aquaq.challenge_31 import solve_31
 from aquaq.challenge_32 import solve_32
 from aquaq.challenge_33 import solve_expedition
+from aquaq.challenge_34 import solve_34
 
 Solution = Callable[[str], Any]
 
@@ -79,6 +80,7 @@ challenges: OrderedDict[str, Solution] = OrderedDict(
         ("31", solve_31),  # takes 14 seconds
         ("32", solve_32),
         ("33", solve_expedition), # takes 9.3 seconds
+        ("34", solve_34),
     ]
 )
 
