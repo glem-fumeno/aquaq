@@ -1,2 +1,2 @@
 #!/bin/sh
-uv run --python pypy aquaq $@
+uv run aquaq $@
